@@ -6,7 +6,7 @@ export default function DurationButton(props: {
 }) {
     return (
         <button
-            className={`flex gap-2 p-2 px-5 rounded-md font-semibold items-center ${props.isActive ? 'bg-primary text-white' : 'bg-slate-200'}`}
+            className={`flex gap-2 p-2 px-5 justify-center w-full rounded-md font-semibold items-center ${props.isActive ? 'bg-primary text-white' : 'bg-slate-200'}`}
         >
             <HiLockClosed />
             {props.text}
