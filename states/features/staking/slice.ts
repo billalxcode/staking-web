@@ -6,8 +6,8 @@ export interface StakingState {
 }
 
 export const StakingInitialState: StakingState = {
-    value: '0',
-    duration: 0,
+    value: '3 Minutes',
+    duration: 180,
 };
 
 const stakingSlice = createSlice({
