@@ -14,7 +14,8 @@ export default function StakingForm() {
                     type='text'
                     name='amount'
                     id='amount'
-                    className='w-full focus:outline-none'
+                    className='w-full focus:outline-none px-3'
+                    placeholder='Enter amount'
                 />
                 <Button>Max</Button>
             </div>
