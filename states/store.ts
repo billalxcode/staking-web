@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import stakingReducer from './features/staking/slice';
+import tokenReducer from './features/token/slice';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             staking: stakingReducer,
+            token: tokenReducer,
         },
     });
 };
