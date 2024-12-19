@@ -1,12 +1,15 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'danger'; // Tambahan prop untuk variasi tombol
+    variant?: 'primary' | 'secondary' | 'danger';
+    size?: 'sm' | 'md' | 'lg';
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ variant = 'primary', className, children, ...props }, ref) => {
-        // Kelas untuk setiap varian tombol
+    (
+        { variant = 'primary', size = 'md', className, children, ...props },
+        ref,
+    ) => {
         const variantClasses = {
             primary:
                 'bg-primary-900 text-white hover:bg-primary disabled:bg-primary-600',
@@ -15,13 +18,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             danger: 'bg-red-500 text-white hover:bg-red-600 disabled:bg-red-600',
         };
 
+        const sizeClasses = {
+            sm: 'px-3 py-1 text-sm',
+            md: 'px-3 py-2 text-sm',
+            lg: 'px-3 py-3 text-sm',
+        };
+
         return (
             <button
                 ref={ref}
                 {...props}
-                className={`rounded-xl px-3 py-3 font-semibold transition duration-300 focus:outline-none active:scale-95 disabled:scale-100 ${
+                className={`rounded-xl font-semibold transition duration-300 focus:outline-none active:scale-95 disabled:scale-100 ${
                     variantClasses[variant]
-                } ${className}`}
+                } ${sizeClasses[size]} ${className}`}
             >
                 {children}
             </button>
