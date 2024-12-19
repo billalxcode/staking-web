@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from '@/states/hooks';
 import { RootState } from '@/states/store';
 import { useCallback } from 'react';
-import { setDuration, setValue } from './slice';
+import { setContract, setDuration, setValue } from './slice';
 
 export default function useStaking() {
     const dispatch = useAppDispatch();
-    const { value, duration } = useAppSelector(
+    const { value, duration, contract } = useAppSelector(
         (state: RootState) => state.staking,
     );
 
@@ -23,10 +23,16 @@ export default function useStaking() {
         [dispatch],
     );
 
+     const updateContract = useCallback((newContract: string) => {
+        dispatch(setContract(newContract))
+     }, [dispatch])
+
     return {
         value,
         duration,
+        contract,
         updateValue,
         updateDuration,
+        updateContract
     };
 }

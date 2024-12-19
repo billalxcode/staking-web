@@ -57,6 +57,7 @@ export type SupportedContracts = {
     m30: SupportedContractsItem;
     d30: SupportedContractsItem;
     d60: SupportedContractsItem;
+    d90: SupportedContractsItem
 };
 
 export const contracts_list: Record<
@@ -80,6 +81,10 @@ export const contracts_list: Record<
             address: '0xD6b4fE1483D9147a4de40a667A188b284bA6cd02',
             abi: StakingArtifact.abi as Abi,
         },
+        d90: {
+            address: "0x6480f93BA9Bf17A31c36068a65e5800e6af963f4",
+            abi: StakingArtifact.abi as Abi
+        }
     },
     31337: {
         token: {
@@ -98,6 +103,10 @@ export const contracts_list: Record<
             address: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9',
             abi: StakingArtifact.abi as Abi,
         },
+        d90: {
+            address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+            abi: StakingArtifact.abi as Abi
+        }
     },
 };
 
