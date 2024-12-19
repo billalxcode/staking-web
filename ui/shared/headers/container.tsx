@@ -1,3 +1,4 @@
+import NetworkSwitch from '../wallet/network';
 import Wallet from '../wallet/wallet';
 
 export default function HeadersContainer() {
@@ -5,7 +6,10 @@ export default function HeadersContainer() {
         <div className='bg-white flex justify-between items-center w-full p-5 border border-[bg-white/20]'>
             <p className='font-bold'>DreyerX Staking</p>
 
-            <Wallet />
+            <div className='flex gap-2'>
+                <NetworkSwitch />
+                <Wallet />
+            </div>
         </div>
     );
 }
