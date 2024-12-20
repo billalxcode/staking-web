@@ -1,6 +1,7 @@
 'use client';
 import useTokenInfo from '@/hooks/useTokenInfo';
 import useToken from '@/states/features/token/hooks';
+import Alert from '@/ui/components/alert/alert';
 import Card from '@/ui/components/card/card';
 import Container from '@/ui/components/container/container';
 import Divider from '@/ui/components/divider/divider';
@@ -12,24 +13,27 @@ import StakingInfo from '@/ui/shared/staking/info';
 import { useEffect } from 'react';
 
 export default function Home() {
-    const { updateName, updateBalance, updateSymbol, updateDecimals } =
+    const { updateName, updateBalance, updateSymbol, updateDecimals, updateAllowance } =
         useToken();
-    const { name, balance, symbol, decimals } = useTokenInfo();
+    const { name, balance, symbol, decimals, allowance } = useTokenInfo();
 
     useEffect(() => {
         updateName(name);
         updateBalance(balance.toString());
         updateSymbol(symbol);
         updateDecimals(decimals);
+        updateAllowance(allowance.toString())
     }, [
         name,
         balance,
         symbol,
         decimals,
+        allowance,
         updateName,
         updateBalance,
         updateSymbol,
         updateDecimals,
+        updateAllowance
     ]);
 
     return (
@@ -37,6 +41,10 @@ export default function Home() {
             <HeadersContainer />
 
             <Container>
+                <div className="flex flex-col gap-2 justify-center">
+
+                <Alert />
+
                 <Card className='w-[500px] gap-3'>
                     <div className='flex flex-col gap-5'>
                         <h1 className='font-bold text-xl'>
@@ -58,6 +66,7 @@ export default function Home() {
                         <StakingActions />
                     </div>
                 </Card>
+                </div>
             </Container>
         </div>
     );

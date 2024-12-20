@@ -3,13 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface StakingState {
     value: string;
     duration: number;
-    contract: `0x${string}` | null
+    amount: string;
+    contract: `0x${string}` | null;
 }
 
 export const StakingInitialState: StakingState = {
     value: 'd30',
     duration: 180,
-    contract: null
+    amount: '0',
+    contract: null,
 };
 
 const stakingSlice = createSlice({
@@ -22,11 +24,15 @@ const stakingSlice = createSlice({
         setDuration: (state, action: PayloadAction<number>) => {
             state.duration = action.payload;
         },
-        setContract: (state, action: PayloadAction<string> ) => {
-            state.contract = action.payload as `0x${string}`
-        }
+        setContract: (state, action: PayloadAction<string>) => {
+            state.contract = action.payload as `0x${string}`;
+        },
+        setAmount: (state, action: PayloadAction<string>) => {
+            state.amount = action.payload;
+        },
     },
 });
 const stakingReducer = stakingSlice.reducer;
-export const { setValue, setDuration, setContract} = stakingSlice.actions;
+export const { setValue, setDuration, setContract, setAmount } =
+    stakingSlice.actions;
 export default stakingReducer;

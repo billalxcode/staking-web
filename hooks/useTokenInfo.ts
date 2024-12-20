@@ -3,14 +3,17 @@ import { Abi, Client } from 'viem';
 import { multicall } from 'viem/actions';
 import { useAccount, usePublicClient } from 'wagmi';
 import useContractByName from './useContractByName';
+import useStakingContract from './useStakingContract';
 
 export default function useTokenInfo() {
     const [balance, setBalance] = useState<bigint>(BigInt(0));
     const [symbol, setSymbol] = useState<string>('DRX');
     const [decimals, setDecimals] = useState<number>(18);
     const [name, setName] = useState<string>('');
+    const [allowance, setAllowance] = useState<bigint>(BigInt(0))
 
     const { address, isConnected } = useAccount();
+    const { staking_contract } = useStakingContract()
     const { contract: Token } = useContractByName('token');
     const publicClient = usePublicClient();
 
@@ -39,13 +42,22 @@ export default function useTokenInfo() {
                     ...token_contract,
                     functionName: 'name',
                 },
+                {
+                    ...token_contract,
+                    functionName: "allowance",
+                    args: [
+                        address,
+                        staking_contract?.address
+                    ]
+                }
             ],
         });
         setBalance((results[0].result as bigint) ?? BigInt(0));
         setSymbol((results[1].result as string) ?? 'DRX');
         setDecimals((results[2].result as number) ?? 18);
         setName((results[3].result as string) ?? 'DreyerX');
-    }, [publicClient, Token?.abi, Token?.address, address]);
+        setAllowance((results[4].result as bigint) ?? '0')
+    }, [publicClient, Token?.abi, Token?.address, address, staking_contract?.address]);
 
     useEffect(() => {
         if (isConnected) {
@@ -58,5 +70,6 @@ export default function useTokenInfo() {
         symbol,
         decimals,
         name,
+        allowance
     };
 }

@@ -1,4 +1,8 @@
+import useStakingInfo from "@/hooks/useStakingInfo";
+
 export default function StakingInfo() {
+    const { } = useStakingInfo()
+    
     return (
         <div className='flex flex-col gap-2'>
             <div className='flex justify-between'>
