@@ -17,7 +17,7 @@ export default function useContractByName(name: keyof SupportedContracts) {
         if (chainId && isSupportedChainId(chainId)) {
             setContract(getContractByName(chainId, name));
         } else {
-            setContract(getContractByName(31337, name));
+            setContract(getContractByName(1337, name));
         }
     }, [chainId, name]);
 
