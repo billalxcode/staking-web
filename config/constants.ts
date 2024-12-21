@@ -39,9 +39,30 @@ export const hardhatDevnet = defineChain({
     },
 });
 
+export const ganacheDevnet = defineChain({
+    id: 1337,
+    name: 'Ganache',
+    nativeCurrency: {
+        name: 'Ethereum',
+        symbol: 'ETH',
+        decimals: 18,
+    },
+    rpcUrls: {
+        default: {
+            http: ['http://localhost:7545'],
+        },
+    },
+    contracts: {
+        multicall3: {
+            address: '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707',
+        },
+    },
+    testnet: true,
+});
+
 export const reown_project_id =
     process.env.NEXT_PUBLIC_REOWN_APPKIT_PROJECT_ID ?? '';
-export const networks = [dreyerxTestnet, hardhatDevnet];
+export const networks = [dreyerxTestnet, hardhatDevnet, ganacheDevnet];
 export const app_settings = {
     network_logo: process.env.NEXT_PUBLIC_NETWORK_LOGO ?? '',
 };
@@ -51,7 +72,7 @@ export interface SupportedContractsItem {
     abi: Abi;
 }
 
-export type SupportedChains = [23452, 31337];
+export type SupportedChains = [23452, 31337, 1337];
 export type SupportedContracts = {
     token: SupportedContractsItem;
     m30: SupportedContractsItem;
@@ -108,12 +129,34 @@ export const contracts_list: Record<
             abi: StakingArtifact.abi as Abi,
         },
     },
+    1337: {
+        token: {
+            address: '0x0165878A594ca255338adfa4d48449f69242Eb8F',
+            abi: TokenArtifact.abi as Abi,
+        },
+        d30: {
+            address: '0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6',
+            abi: StakingArtifact.abi as Abi,
+        },
+        m30: {
+            address: '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853',
+            abi: StakingArtifact.abi as Abi,
+        },
+        d60: {
+            address: '0x8A791620dd6260079BF849Dc5567aDC3F2FdC318',
+            abi: StakingArtifact.abi as Abi,
+        },
+        d90: {
+            address: '0x610178dA211FEF7D417bC0e6FeD39F05609AD788',
+            abi: StakingArtifact.abi as Abi,
+        },
+    },
 };
 
 export function isSupportedChainId(
     chainId: number,
 ): chainId is SupportedChains[number] {
-    return chainId === 23452 || chainId === 31337;
+    return chainId === 23452 || chainId === 31337 || chainId === 1337;
 }
 
 export function getContractByName(
