@@ -5,6 +5,7 @@ export interface StakingState {
     duration: number;
     amount: string;
     contract: `0x${string}` | null;
+    action: 'approve' | 'insufficient' | 'stake' | 'amount';
 }
 
 export const StakingInitialState: StakingState = {
@@ -12,6 +13,7 @@ export const StakingInitialState: StakingState = {
     duration: 180,
     amount: '0',
     contract: null,
+    action: 'amount',
 };
 
 const stakingSlice = createSlice({
@@ -30,9 +32,17 @@ const stakingSlice = createSlice({
         setAmount: (state, action: PayloadAction<string>) => {
             state.amount = action.payload;
         },
+        setAction: (
+            state,
+            action: PayloadAction<
+                'approve' | 'insufficient' | 'stake' | 'amount'
+            >,
+        ) => {
+            state.action = action.payload;
+        },
     },
 });
 const stakingReducer = stakingSlice.reducer;
-export const { setValue, setDuration, setContract, setAmount } =
+export const { setValue, setDuration, setContract, setAmount, setAction } =
     stakingSlice.actions;
 export default stakingReducer;
