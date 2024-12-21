@@ -1,17 +1,36 @@
 export function calculateAPY(
-    rewardPerSecond: number,
-    totalStakedTokens: number,
-    compoundingPeriodsPerYear: number = 365
-  ): number {
-    if (totalStakedTokens === 0) {
-      return 0;
+    {
+        rewardPerSecond,
+        totalStakedTokens,
+        decimals,
+    }: {
+        rewardPerSecond: bigint;
+        totalStakedTokens: bigint;
+        decimals: number;
+    },
+    lockDurationDays: number,
+): number {
+    if (
+        typeof rewardPerSecond == 'undefined' ||
+        typeof totalStakedTokens == 'undefined' ||
+        typeof decimals == 'undefined'
+    )
+        return 0;
+    console.log('Reward per second', rewardPerSecond);
+    console.log('Total staked', totalStakedTokens);
+    console.log('Decimals', decimals);
+    const totalRewards =
+        parseFloat(rewardPerSecond.toString()) * (lockDurationDays * 86400);
+
+    // Tangani kasus jika totalStakedTokens adalah nol
+    if (totalStakedTokens === BigInt(0)) {
+        return 0;
     }
-  
-    const rewardPerYear = rewardPerSecond * 365 * 24 * 60 * 60;
-  
-    const rewardRate = rewardPerYear / totalStakedTokens;
-    const apy = Math.pow(1 + rewardRate / compoundingPeriodsPerYear, compoundingPeriodsPerYear) - 1;
-  
-    return parseFloat((apy * 100).toFixed(2));
-  }
-  
+
+    // Hitung APY dan konversi ke persentase
+    const annualRewardRate =
+        (totalRewards * 365) / parseFloat(totalStakedTokens.toString());
+    const apy = (Number(annualRewardRate) / Math.pow(10, decimals)) * 100;
+
+    return apy; // Hasil dalam persen
+}
