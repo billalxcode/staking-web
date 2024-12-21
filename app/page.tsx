@@ -13,8 +13,13 @@ import StakingInfo from '@/ui/shared/staking/info';
 import { useEffect } from 'react';
 
 export default function Home() {
-    const { updateName, updateBalance, updateSymbol, updateDecimals, updateAllowance } =
-        useToken();
+    const {
+        updateName,
+        updateBalance,
+        updateSymbol,
+        updateDecimals,
+        updateAllowance,
+    } = useToken();
     const { name, balance, symbol, decimals, allowance } = useTokenInfo();
 
     useEffect(() => {
@@ -22,7 +27,7 @@ export default function Home() {
         updateBalance(balance.toString());
         updateSymbol(symbol);
         updateDecimals(decimals);
-        updateAllowance(allowance.toString())
+        updateAllowance(allowance.toString());
     }, [
         name,
         balance,
@@ -33,7 +38,7 @@ export default function Home() {
         updateBalance,
         updateSymbol,
         updateDecimals,
-        updateAllowance
+        updateAllowance,
     ]);
 
     return (
@@ -41,31 +46,30 @@ export default function Home() {
             <HeadersContainer />
 
             <Container>
-                <div className="flex flex-col gap-2 justify-center">
+                <div className='flex flex-col gap-2 justify-center'>
+                    <Alert />
 
-                <Alert />
+                    <Card className='w-[500px] gap-3'>
+                        <div className='flex flex-col gap-5'>
+                            <h1 className='font-bold text-xl'>
+                                DreyerX Staking Pool
+                            </h1>
 
-                <Card className='w-[500px] gap-3'>
-                    <div className='flex flex-col gap-5'>
-                        <h1 className='font-bold text-xl'>
-                            DreyerX Staking Pool
-                        </h1>
+                            <DurationSelector />
+                            <p className='text-center'>
+                                Stake $DRX token to earn $DRX tokens
+                            </p>
+                            <Divider />
 
-                        <DurationSelector />
-                        <p className='text-center'>
-                            Stake $DRX token to earn $DRX tokens
-                        </p>
-                        <Divider />
+                            <StakingInfo />
 
-                        <StakingInfo />
+                            <Divider />
 
-                        <Divider />
+                            <StakingForm />
 
-                        <StakingForm />
-
-                        <StakingActions />
-                    </div>
-                </Card>
+                            <StakingActions />
+                        </div>
+                    </Card>
                 </div>
             </Container>
         </div>
