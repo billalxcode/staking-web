@@ -14,7 +14,7 @@ import useContractByName from '../useContractByName';
 import useStakingContract from '../useStakingContract';
 
 export default function useApproval() {
-    const { amount } = useStaking();
+    const { amount, updateAction } = useStaking();
     const { decimals } = useToken();
     const { setAlertMessage } = useAlert();
     const { contract: TokenContract } = useContractByName('token');
@@ -61,6 +61,7 @@ export default function useApproval() {
                 },
                 true,
             );
+            updateAction('stake');
         } catch (e) {
             if (e instanceof ContractFunctionExecutionError) {
                 setAlertMessage(
@@ -91,6 +92,7 @@ export default function useApproval() {
         decimals,
         setAlertMessage,
         publicClient,
+        updateAction,
     ]);
 
     return {
