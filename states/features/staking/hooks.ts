@@ -1,19 +1,21 @@
 import { useAppDispatch, useAppSelector } from '@/states/hooks';
 import { RootState } from '@/states/store';
+import JSBI from 'jsbi';
 import { useCallback, useEffect, useState } from 'react';
-import { setAmount, setContract, setDuration, setValue } from './slice';
-import JSBI from "jsbi"
 import useToken from '../token/hooks';
+import { setAmount, setContract, setDuration, setValue } from './slice';
 
 export default function useStaking() {
     const dispatch = useAppDispatch();
     const { value, duration, contract, amount } = useAppSelector(
         (state: RootState) => state.staking,
     );
-    const { allowance, balance } = useToken()
-    const [errorMessage, setErrorMessage] = useState<string | null>(null)
-    const [action, setAction] = useState<"approve" | "insufficient" | "stake" | "amount">("amount")
-    
+    const { allowance, balance } = useToken();
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [action, setAction] = useState<
+        'approve' | 'insufficient' | 'stake' | 'amount'
+    >('amount');
+
     const updateValue = useCallback(
         (newValue: string) => {
             dispatch(setValue(newValue));
@@ -43,19 +45,15 @@ export default function useStaking() {
     );
 
     useEffect(() => {
-        const jsbiAllowance = JSBI.BigInt(allowance)
-        const jsbiBalance = JSBI.BigInt(balance)
-        
+        const jsbiAllowance = JSBI.BigInt(allowance);
+        const jsbiBalance = JSBI.BigInt(balance);
+
         if (JSBI.lessThan(jsbiAllowance, jsbiBalance)) {
-            setAction("approve")
+            setAction('approve');
         } else {
-            setAction("stake")
+            setAction('stake');
         }
-    }, [
-        allowance,
-        balance,
-        amount
-    ])
+    }, [allowance, balance, amount]);
 
     return {
         action,
