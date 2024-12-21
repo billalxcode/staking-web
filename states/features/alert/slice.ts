@@ -42,7 +42,7 @@ const alertSlice = createSlice({
     },
 });
 
-const alertReducer = alertSlice.reducer
+const alertReducer = alertSlice.reducer;
 export const { setMessage, setVariant, setDuration, setIsHidden } =
     alertSlice.actions;
 export default alertReducer;
