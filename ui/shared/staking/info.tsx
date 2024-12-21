@@ -11,7 +11,7 @@ export default function StakingInfo() {
         <div className='flex flex-col gap-2'>
             <div className='flex justify-between'>
                 <p className='font-bold'>APY Rewards</p>
-                <p className='font-semibold'>{parseInt(apy) / 100}%</p>
+                <p className='font-semibold'>{parseInt(apy)}%</p>
             </div>
             <div className='flex justify-between'>
                 <p className='font-bold'>Total Staked</p>
