@@ -30,7 +30,15 @@ export default function StakingForm() {
                     className='w-full focus:outline-none px-3'
                     placeholder='Enter amount'
                 />
-                <Button onClick={() => updateAmount(formatUnits(BigInt(balance), decimals ?? 18))}>Max</Button>
+                <Button
+                    onClick={() =>
+                        updateAmount(
+                            formatUnits(BigInt(balance), decimals ?? 18),
+                        )
+                    }
+                >
+                    Max
+                </Button>
             </div>
         </div>
     );
