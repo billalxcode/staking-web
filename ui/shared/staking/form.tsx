@@ -20,14 +20,14 @@ export default function StakingForm() {
                     {symbol ?? ''}
                 </p>
             </div>
-            <div className='flex justify-between border w-full p-2'>
+            <div className='flex justify-between border w-full p-2 dark:border-dark-border'>
                 <input
                     type='text'
                     name='amount'
                     id='amount'
                     value={amount}
                     onChange={(e) => updateAmount(e.target.value)}
-                    className='w-full focus:outline-none px-3'
+                    className='w-full focus:outline-none px-3 dark:bg-dark-card60'
                     placeholder='Enter amount'
                 />
                 <Button

@@ -8,9 +8,9 @@ export default function DurationButton(props: {
     return (
         <button
             onClick={props.onClick}
-            className={`flex gap-2 p-2 px-5 justify-center w-full rounded-md font-semibold items-center ${props.isActive ? 'bg-primary text-white' : 'bg-slate-200'}`}
+            className={`flex gap-2 p-2 px-5 justify-center w-full rounded-md font-semibold items-center ${props.isActive ? 'bg-primary text-white dark:text-dark-text' : 'bg-dark-duration-background dark:text-background'}`}
         >
-            <HiLockClosed />
+            <HiLockClosed className='hidden lg:block md:block' />
             {props.text}
         </button>
     );

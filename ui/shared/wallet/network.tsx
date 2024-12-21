@@ -12,7 +12,7 @@ export default function NetworkSwitch() {
         <>
             <div
                 onClick={onOpen}
-                className='flex gap-3 items-center border p-2 rounded-full px-4 transition duration-300 cursor-pointer'
+                className='flex gap-3 items-center border dark:border-dark-border p-2 rounded-full px-4 transition duration-300 cursor-pointer'
             >
                 {chain?.name}
                 <HiChevronDown />

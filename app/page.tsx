@@ -49,7 +49,7 @@ export default function Home() {
                 <div className='flex flex-col gap-2 justify-center'>
                     <Alert />
 
-                    <Card className='w-[500px] gap-3'>
+                    <Card className='w-full lg:w-[500px] gap-3'>
                         <div className='flex flex-col gap-5'>
                             <h1 className='font-bold text-xl'>
                                 DreyerX Staking Pool

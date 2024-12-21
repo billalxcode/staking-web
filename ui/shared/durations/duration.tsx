@@ -29,7 +29,7 @@ export default function DurationSelector() {
     }, [chainId, value, updateContract]);
 
     return (
-        <div className='bg-slate-200 w-full p-1 flex rounded-md gap-3 justify-center'>
+        <div className='bg-slate-200 w-full p-1 flex rounded-md gap-3 justify-center dark:bg-dark-duration-background'>
             {durations.map((v) => {
                 return (
                     <DurationButton

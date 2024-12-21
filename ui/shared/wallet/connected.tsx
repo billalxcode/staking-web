@@ -22,7 +22,7 @@ export default function WalletConnected() {
         <>
             <div
                 onClick={openAccountModal}
-                className='flex cursor-pointer items-center gap-2 rounded-full border p-2 transition duration-500 hover:border-slate-300 active:scale-95'
+                className='flex cursor-pointer items-center gap-2 rounded-full border dark:border-dark-border p-2 transition duration-500 hover:border-dark-border20 active:scale-95'
             >
                 <div className='rounded-full bg-primary p-3 text-white'>
                     <HiUser />
