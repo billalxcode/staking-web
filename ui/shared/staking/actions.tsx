@@ -6,28 +6,28 @@ import Button from '@/ui/components/button/button';
 import { useEffect } from 'react';
 
 export default function StakingActions() {
-    const { setAlertMessage } = useAlert()
-    const { action, errorMessage } = useStaking()
-    const { handleApprove } = useApproval()
-    const { handleStake } = useStake()
+    const { setAlertMessage } = useAlert();
+    const { action, errorMessage } = useStaking();
+    const { handleApprove } = useApproval();
+    const { handleStake } = useStake();
 
     useEffect(() => {
         if (errorMessage) {
             setAlertMessage({
                 message: errorMessage,
                 variant: 'danger',
-                duration: 3000
-            })
+                duration: 3000,
+            });
         }
-    }, [errorMessage, setAlertMessage])
+    }, [errorMessage, setAlertMessage]);
 
-    if (action == "approve") {
+    if (action == 'approve') {
         return (
             <Button size='lg' onClick={() => handleApprove()}>
                 Approve
             </Button>
         );
-    } else if (action == "stake") {
+    } else if (action == 'stake') {
         return (
             <Button size='lg' onClick={() => handleStake()}>
                 Stake
@@ -36,8 +36,8 @@ export default function StakingActions() {
     }
 
     return (
-        <Button variant='secondary' size='lg' disabled >
+        <Button variant='secondary' size='lg' disabled>
             Enter a amount
         </Button>
-    )
+    );
 }
