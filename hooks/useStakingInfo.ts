@@ -7,7 +7,7 @@ import useStakingContract from './useStakingContract';
 export default function useStakingInfo() {
     const [apy, setApy] = useState<string>('');
     const [myStaked, setMyStaked] = useState(BigInt(0));
-    const [pendingReward, setPendingReward] = useState(BigInt(0))
+    const [pendingReward, setPendingReward] = useState(BigInt(0));
     const [totalStakingTokens, setTotalStakingTokens] = useState<bigint>(
         BigInt(0),
     );
@@ -38,12 +38,13 @@ export default function useStakingInfo() {
                 },
                 {
                     ...staking_contract,
-                    functionName: "pendingReward",
-                    args: [address]
-                }
+                    functionName: 'pendingReward',
+                    args: [address],
+                },
             ],
         });
-        const [stakingApy, stakingTotalStaked, userInfo, stakingPendingReward] = results;
+        const [stakingApy, stakingTotalStaked, userInfo, stakingPendingReward] =
+            results;
 
         if (stakingApy.result !== undefined) {
             setApy((stakingApy.result as bigint).toString());
@@ -69,11 +70,11 @@ export default function useStakingInfo() {
             setMyStaked(BigInt(0));
         }
         if (stakingPendingReward.result !== undefined) {
-            setPendingReward(stakingPendingReward.result as bigint)
+            setPendingReward(stakingPendingReward.result as bigint);
         } else {
-            console.warn("failed to fetch staking reward pending")
-            setRetryCount((p) => p+=1)
-            setPendingReward(BigInt(0))
+            console.warn('failed to fetch staking reward pending');
+            setRetryCount((p) => (p += 1));
+            setPendingReward(BigInt(0));
         }
     }, [
         StakingContract?.abi,
