@@ -11,6 +11,7 @@ export default function useStakingInfo() {
     const [totalStakingTokens, setTotalStakingTokens] = useState<bigint>(
         BigInt(0),
     );
+    const [ holderUnlocktime, setHolderUnlocktime ] = useState<Date | null>(null)
     const { staking_contract: StakingContract } = useStakingContract();
     const [retryCount, setRetryCount] = useState(0);
     const { address } = useAccount();
@@ -41,9 +42,14 @@ export default function useStakingInfo() {
                     functionName: 'pendingReward',
                     args: [address],
                 },
+                {
+                    ...staking_contract,
+                    functionName: 'holderUnlockTime',
+                    args: [address]
+                }
             ],
         });
-        const [stakingApy, stakingTotalStaked, userInfo, stakingPendingReward] =
+        const [stakingApy, stakingTotalStaked, userInfo, stakingPendingReward, stakingHolderUnlocktime] =
             results;
 
         if (stakingApy.result !== undefined) {
@@ -76,6 +82,11 @@ export default function useStakingInfo() {
             setRetryCount((p) => (p += 1));
             setPendingReward(BigInt(0));
         }
+        if (stakingHolderUnlocktime.result !== undefined) {
+            const parsedStakingHolderTime = (stakingHolderUnlocktime.result as bigint).toString()
+            const holderUnlockDate = new Date((parseInt(parsedStakingHolderTime) as number ?? 0) * 1000)
+            setHolderUnlocktime(holderUnlockDate)
+        }
     }, [
         StakingContract?.abi,
         StakingContract?.address,
@@ -98,6 +109,7 @@ export default function useStakingInfo() {
         apy,
         myStaked,
         pendingReward,
+        holderUnlocktime,
         totalStakingTokens,
     };
 }
