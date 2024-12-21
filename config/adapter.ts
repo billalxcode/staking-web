@@ -6,7 +6,12 @@ import {
     safeWallet,
     trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
-import { dreyerxTestnet, hardhatDevnet, reown_project_id } from './constants';
+import {
+    dreyerxTestnet,
+    ganacheDevnet,
+    hardhatDevnet,
+    reown_project_id,
+} from './constants';
 
 if (!reown_project_id) {
     throw new Error('Project ID is not defined');
@@ -21,6 +26,9 @@ export const config = getDefaultConfig({
         },
         {
             ...hardhatDevnet,
+        },
+        {
+            ...ganacheDevnet,
         },
     ],
     ssr: true,
