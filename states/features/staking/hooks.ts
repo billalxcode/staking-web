@@ -1,20 +1,22 @@
 import { useAppDispatch, useAppSelector } from '@/states/hooks';
 import { RootState } from '@/states/store';
 import JSBI from 'jsbi';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import useToken from '../token/hooks';
-import { setAmount, setContract, setDuration, setValue } from './slice';
+import {
+    setAction,
+    setAmount,
+    setContract,
+    setDuration,
+    setValue,
+} from './slice';
 
 export default function useStaking() {
     const dispatch = useAppDispatch();
-    const { value, duration, contract, amount } = useAppSelector(
+    const { value, duration, contract, amount, action } = useAppSelector(
         (state: RootState) => state.staking,
     );
     const { allowance, balance } = useToken();
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [action, setAction] = useState<
-        'approve' | 'insufficient' | 'stake' | 'amount'
-    >('amount');
 
     const updateValue = useCallback(
         (newValue: string) => {
@@ -44,16 +46,23 @@ export default function useStaking() {
         [dispatch],
     );
 
+    const updateAction = useCallback(
+        (newAction: 'approve' | 'insufficient' | 'stake' | 'amount') => {
+            dispatch(setAction(newAction));
+        },
+        [dispatch],
+    );
+
     useEffect(() => {
         const jsbiAllowance = JSBI.BigInt(allowance);
         const jsbiBalance = JSBI.BigInt(balance);
-
+        
         if (JSBI.lessThan(jsbiAllowance, jsbiBalance)) {
-            setAction('approve');
+            updateAction('approve');
         } else {
-            setAction('stake');
+            updateAction('stake');
         }
-    }, [allowance, balance, amount]);
+    }, [allowance, balance, amount, updateAction]);
 
     return {
         action,
@@ -61,10 +70,10 @@ export default function useStaking() {
         duration,
         contract,
         amount,
-        errorMessage,
         updateValue,
         updateDuration,
         updateContract,
         updateAmount,
+        updateAction,
     };
 }
