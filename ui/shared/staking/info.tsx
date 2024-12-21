@@ -4,7 +4,8 @@ import { formatUnits } from 'viem';
 
 export default function StakingInfo() {
     const { decimals, symbol } = useToken();
-    const { apy, totalStakingTokens, myStaked, pendingReward } = useStakingInfo();
+    const { apy, totalStakingTokens, myStaked, pendingReward } =
+        useStakingInfo();
 
     return (
         <div className='flex flex-col gap-2'>
@@ -23,16 +24,14 @@ export default function StakingInfo() {
             <div className='flex justify-between'>
                 <p className='font-bold'>My Staked</p>
                 <p className='font-semibold'>
-                    {formatUnits(BigInt(myStaked), decimals ?? 18) ??
-                        '-'}{' '}
+                    {formatUnits(BigInt(myStaked), decimals ?? 18) ?? '-'}{' '}
                     {symbol ?? ''}
                 </p>
             </div>
             <div className='flex justify-between'>
                 <p className='font-bold'>Pending Reward</p>
                 <p className='font-semibold'>
-                {formatUnits(BigInt(pendingReward), decimals ?? 18) ??
-                        '-'}{' '}
+                    {formatUnits(BigInt(pendingReward), decimals ?? 18) ?? '-'}{' '}
                     {symbol ?? ''}
                 </p>
             </div>
