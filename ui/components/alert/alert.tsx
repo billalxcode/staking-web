@@ -32,7 +32,7 @@ export default function Alert() {
                     aria-orientation='vertical'
                     aria-labelledby='search-bar'
                     tabIndex={-1}
-                    className='w-full lg:w-[650px]'
+                    className='w-full'
                 >
                     <div
                         className={`rounded-xl bg-white p-4 font-font-semibold shadow-sm flex flex-row  items-center gap-4 w-full ${className}`}
