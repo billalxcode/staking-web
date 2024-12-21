@@ -11,6 +11,7 @@ body {
     color: var(--foreground);
     background: var(--background);
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #1b1b1b;
     background-image: url('https://www.tryring.ai/assets/bg-hello-f16bb296.png');
     background-repeat: no-repeat;
     background-size: cover;
