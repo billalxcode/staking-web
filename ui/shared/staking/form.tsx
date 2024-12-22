@@ -10,16 +10,16 @@ export default function StakingForm() {
     const { amount, updateAmount } = useStaking();
 
     const handleFocus = useCallback(() => {
-        if (amount === "0") {
-            updateAmount("")
+        if (amount === '0') {
+            updateAmount('');
         }
-    }, [amount, updateAmount])
+    }, [amount, updateAmount]);
 
     const handleBlur = useCallback(() => {
-        if (amount.trim() === "") {
-            updateAmount("0")
+        if (amount.trim() === '') {
+            updateAmount('0');
         }
-    }, [amount, updateAmount])
+    }, [amount, updateAmount]);
 
     return (
         <div className='flex flex-col gap-2'>
