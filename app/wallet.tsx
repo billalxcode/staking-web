@@ -8,7 +8,9 @@ import { WagmiProvider } from 'wagmi';
 
 const queryclient = new QueryClient();
 
-export default function WalletProvider(props: { children: ReactNode }) {
+export default function WalletProvider(props: {
+    children: ReactNode
+}) {
     return (
         <WagmiProvider config={config}>
             <QueryClientProvider client={queryclient}>
