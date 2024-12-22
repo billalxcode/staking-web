@@ -1,4 +1,5 @@
 import useApproval from '@/hooks/actions/useApproval';
+import useClaimReward from '@/hooks/actions/useClaimReward';
 import useStake from '@/hooks/actions/useStake';
 import useWithdraw from '@/hooks/actions/useWithdraw';
 import useStakingInfo from '@/hooks/useStakingInfo';
@@ -10,6 +11,7 @@ export default function StakingActions() {
     const { action } = useStaking();
     const { pendingReward, myStaked } = useStakingInfo();
     const { handleNormalWithdraw, handleEmergencyWithdraw } = useWithdraw();
+    const { handleClaimReward } = useClaimReward();
     const { isEmergency } = useWithdrawInfo();
     const { handleApprove } = useApproval();
     const { handleStake } = useStake();
@@ -37,7 +39,12 @@ export default function StakingActions() {
                     Approve
                 </Button>
             ) : null}
-            <Button variant='primary' size='lg' disabled={pendingReward <= 1}>
+            <Button
+                variant='primary'
+                onClick={() => handleClaimReward()}
+                size='lg'
+                disabled={pendingReward <= 1}
+            >
                 Claim Reward
             </Button>
             {isEmergency ? (
