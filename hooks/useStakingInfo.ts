@@ -22,79 +22,80 @@ export default function useStakingInfo() {
             address: StakingContract?.address as `0x${string}`,
             abi: StakingContract?.abi as Abi,
         };
-        const results = await multicall(publicClient as Client, {
-            contracts: [
-                {
-                    ...staking_contract,
-                    functionName: 'apy',
-                },
-                {
-                    ...staking_contract,
-                    functionName: 'totalStaked',
-                },
-                {
-                    ...staking_contract,
-                    functionName: 'userInfo',
-                    args: [address],
-                },
-                {
-                    ...staking_contract,
-                    functionName: 'pendingReward',
-                    args: [address],
-                },
-                {
-                    ...staking_contract,
-                    functionName: 'holderUnlockTime',
-                    args: [address],
-                },
-            ],
-        });
-        const [
-            stakingApy,
-            stakingTotalStaked,
-            userInfo,
-            stakingPendingReward,
-            stakingHolderUnlocktime,
-        ] = results;
+        try {
 
-        if (stakingApy.result !== undefined) {
-            setApy((stakingApy.result as bigint).toString());
-        } else {
-            console.warn('Failed to fetch APY');
-            setApy('0');
-            setRetryCount((p) => (p += 1));
-        }
-
-        if (stakingTotalStaked.result !== undefined) {
-            setTotalStakingTokens(stakingTotalStaked.result as bigint);
-        } else {
-            console.warn('Failed to fetch total staked');
-            setRetryCount((p) => (p += 1));
-            setTotalStakingTokens(BigInt(0));
-        }
-        if (userInfo.result !== undefined) {
-            const user = userInfo.result as [bigint, bigint];
-            setMyStaked(user[0]);
-        } else {
-            console.warn('failed to fetch my staked');
-            setRetryCount((p) => p + 1);
-            setMyStaked(BigInt(0));
-        }
-        if (stakingPendingReward.result !== undefined) {
-            setPendingReward(stakingPendingReward.result as bigint);
-        } else {
-            console.warn('failed to fetch staking reward pending');
-            setRetryCount((p) => (p += 1));
-            setPendingReward(BigInt(0));
-        }
-        if (stakingHolderUnlocktime.result !== undefined) {
-            const parsedStakingHolderTime = (
-                stakingHolderUnlocktime.result as bigint
-            ).toString();
-            const holderUnlockDate = new Date(
-                ((parseInt(parsedStakingHolderTime) as number) ?? 0) * 1000,
-            );
-            setHolderUnlocktime(holderUnlockDate);
+            const results = await multicall(publicClient as Client, {
+                contracts: [
+                    {
+                        ...staking_contract,
+                        functionName: 'apy',
+                    },
+                    {
+                        ...staking_contract,
+                        functionName: 'totalStaked',
+                    },
+                    {
+                        ...staking_contract,
+                        functionName: 'userInfo',
+                        args: [address],
+                    },
+                    {
+                        ...staking_contract,
+                        functionName: 'pendingReward',
+                        args: [address],
+                    },
+                    {
+                        ...staking_contract,
+                        functionName: 'holderUnlockTime',
+                        args: [address],
+                    },
+                ],
+            });
+            const [
+                stakingApy,
+                stakingTotalStaked,
+                userInfo,
+                stakingPendingReward,
+                stakingHolderUnlocktime,
+            ] = results;
+    
+            if (stakingApy.result !== undefined) {
+                setApy((stakingApy.result as bigint).toString());
+            } else {
+                setApy('0');
+                setRetryCount((p) => (p += 1));
+            }
+    
+            if (stakingTotalStaked.result !== undefined) {
+                setTotalStakingTokens(stakingTotalStaked.result as bigint);
+            } else {
+                setRetryCount((p) => (p += 1));
+                setTotalStakingTokens(BigInt(0));
+            }
+            if (userInfo.result !== undefined) {
+                const user = userInfo.result as [bigint, bigint];
+                setMyStaked(user[0]);
+            } else {
+                setRetryCount((p) => p + 1);
+                setMyStaked(BigInt(0));
+            }
+            if (stakingPendingReward.result !== undefined) {
+                setPendingReward(stakingPendingReward.result as bigint);
+            } else {
+                setRetryCount((p) => (p += 1));
+                setPendingReward(BigInt(0));
+            }
+            if (stakingHolderUnlocktime.result !== undefined) {
+                const parsedStakingHolderTime = (
+                    stakingHolderUnlocktime.result as bigint
+                ).toString();
+                const holderUnlockDate = new Date(
+                    ((parseInt(parsedStakingHolderTime) as number) ?? 0) * 1000,
+                );
+                setHolderUnlocktime(holderUnlockDate);
+            }
+        } catch (e) {
+            if (e instanceof TypeError) return
         }
     }, [
         StakingContract?.abi,

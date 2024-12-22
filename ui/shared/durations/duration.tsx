@@ -24,7 +24,11 @@ export default function DurationSelector() {
     const { value, updateValue, updateContract } = useStaking();
 
     useEffect(() => {
-        const staking_contract = getContractByName((chainId ?? 23452) as 23452 | 31337 | 1337, value as keyof SupportedContracts);        updateContract(staking_contract.address);
+        const staking_contract = getContractByName(
+            (chainId ?? 23452) as 23452 | 31337 | 1337,
+            value as keyof SupportedContracts,
+        );
+        updateContract(staking_contract.address);
     }, [chainId, value, updateContract]);
 
     return (

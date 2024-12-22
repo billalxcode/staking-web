@@ -65,7 +65,7 @@ export default function NetworkSwitchModal(props: {
                             key={network.id}
                             className='cursor-pointer rounded transition duration-300 hover:bg-primary group'
                         >
-                            <p className='p-4 font-semibold text-black group-hover:text-white'>
+                            <p className='p-4 font-semibold text-black dark:text-white group-hover:text-white'>
                                 {network.name}
                             </p>
                         </div>

@@ -1,6 +1,6 @@
-import '@rainbow-me/rainbowkit/styles.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { headers } from 'next/headers';
 import { Suspense } from 'react';
 import './globals.css';
 import AppProviders from './providers';
@@ -43,16 +43,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const headersObj = await headers();
+    const cookies = headersObj.get('cookie');
+
     return (
         <html lang='en'>
             <body className={`${inter.className} antialiased`}>
                 <Suspense>
-                    <AppProviders>{children}</AppProviders>
+                    <AppProviders cookies={cookies}>{children}</AppProviders>
                 </Suspense>
             </body>
         </html>

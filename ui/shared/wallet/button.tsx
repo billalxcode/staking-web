@@ -1,8 +1,13 @@
+'use client';
 import Button from '@/ui/components/button/button';
-import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { useAppKit } from '@reown/appkit/react';
 
 export default function WalletButton() {
-    const { openConnectModal } = useConnectModal();
+    const { open } = useAppKit();
 
-    return <Button onClick={openConnectModal}>Connect Wallet</Button>;
+    return (
+        <Button onClick={() => open({ view: 'Connect' })}>
+            Connect Wallet
+        </Button>
+    );
 }

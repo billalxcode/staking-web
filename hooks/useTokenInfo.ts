@@ -23,37 +23,41 @@ export default function useTokenInfo() {
             abi: Token?.abi as Abi,
         };
 
-        const results = await multicall(publicClient as Client, {
-            contracts: [
-                {
-                    ...token_contract,
-                    functionName: 'balanceOf',
-                    args: [address],
-                },
-                {
-                    ...token_contract,
-                    functionName: 'symbol',
-                },
-                {
-                    ...token_contract,
-                    functionName: 'decimals',
-                },
-                {
-                    ...token_contract,
-                    functionName: 'name',
-                },
-                {
-                    ...token_contract,
-                    functionName: 'allowance',
-                    args: [address, staking_contract?.address],
-                },
-            ],
-        });
-        setBalance((results[0].result as bigint) ?? BigInt(0));
-        setSymbol((results[1].result as string) ?? 'DRX');
-        setDecimals((results[2].result as number) ?? 18);
-        setName((results[3].result as string) ?? 'DreyerX');
-        setAllowance((results[4].result as bigint) ?? '0');
+        try {
+            const results = await multicall(publicClient as Client, {
+                contracts: [
+                    {
+                        ...token_contract,
+                        functionName: 'balanceOf',
+                        args: [address],
+                    },
+                    {
+                        ...token_contract,
+                        functionName: 'symbol',
+                    },
+                    {
+                        ...token_contract,
+                        functionName: 'decimals',
+                    },
+                    {
+                        ...token_contract,
+                        functionName: 'name',
+                    },
+                    {
+                        ...token_contract,
+                        functionName: 'allowance',
+                        args: [address, staking_contract?.address],
+                    },
+                ],
+            });
+            setBalance((results[0].result as bigint) ?? BigInt(0));
+            setSymbol((results[1].result as string) ?? 'DRX');
+            setDecimals((results[2].result as number) ?? 18);
+            setName((results[3].result as string) ?? 'DreyerX');
+            setAllowance((results[4].result as bigint) ?? '0');
+        } catch (e) {
+            if (e instanceof TypeError) return;
+        }
     }, [
         publicClient,
         Token?.abi,

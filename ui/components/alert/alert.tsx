@@ -35,7 +35,7 @@ export default function Alert() {
                     className='w-full'
                 >
                     <div
-                        className={`rounded-xl bg-white p-4 font-font-semibold shadow-sm flex flex-row  items-center gap-4 w-full ${className}`}
+                        className={`rounded-xl bg-white dark:bg-dark-card60 p-4 font-font-semibold shadow-sm flex flex-row  items-center gap-4 w-full ${className}`}
                     >
                         <AlertAnimate /> {message}
                     </div>

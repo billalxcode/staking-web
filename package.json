@@ -12,8 +12,9 @@
     },
     "dependencies": {
         "@dreyerx/dreyerxns-js": "^1.0.2",
-        "@rainbow-me/rainbowkit": "^2.2.1",
         "@reduxjs/toolkit": "^2.5.0",
+        "@reown/appkit": "^1.6.2",
+        "@reown/appkit-adapter-wagmi": "^1.6.2",
         "@tanstack/react-query": "^5.62.8",
         "@types/moment": "^2.11.29",
         "jsbi": "^4.3.0",

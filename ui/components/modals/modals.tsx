@@ -60,7 +60,7 @@ export default function Modal({
                         ref={modalRef}
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className={`w-full ${sizeClass} shadow-lg mx-4 relative rounded-lg bg-white p-6`}
+                        className={`w-full ${sizeClass} shadow-lg mx-4 relative rounded-lg bg-white p-6 dark:bg-dark-background`}
                     >
                         {title && (
                             <div className='mb-4 flex items-center justify-between'>
