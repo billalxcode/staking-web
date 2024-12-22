@@ -56,7 +56,7 @@ export default function useStaking() {
     useEffect(() => {
         const jsbiAllowance = JSBI.BigInt(allowance);
         const jsbiBalance = JSBI.BigInt(balance);
-        
+
         if (JSBI.lessThan(jsbiAllowance, jsbiBalance)) {
             updateAction('approve');
         } else {

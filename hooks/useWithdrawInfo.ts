@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
-import useStakingInfo from "./useStakingInfo";
+import { useEffect, useState } from 'react';
+import useStakingInfo from './useStakingInfo';
 
 export default function useWithdrawInfo() {
-    const { holderUnlocktime } = useStakingInfo()
-    const [isEmergency, setIsEmergency] = useState<boolean>(false)
+    const { holderUnlocktime } = useStakingInfo();
+    const [isEmergency, setIsEmergency] = useState<boolean>(false);
 
     useEffect(() => {
-        const dateNow = new Date().getTime()
-        const nextWithdrawl = holderUnlocktime?.getTime() ?? 0
+        const dateNow = new Date().getTime();
+        const nextWithdrawl = holderUnlocktime?.getTime() ?? 0;
 
         if (holderUnlocktime) {
-            setIsEmergency(nextWithdrawl > dateNow)
+            setIsEmergency(nextWithdrawl > dateNow);
         } else {
-            setIsEmergency(false)
+            setIsEmergency(false);
         }
-        
-    }, [holderUnlocktime])
+    }, [holderUnlocktime]);
 
     return {
-        isEmergency
-    }
+        isEmergency,
+    };
 }

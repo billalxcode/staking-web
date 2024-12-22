@@ -8,9 +8,9 @@ import Button from '@/ui/components/button/button';
 
 export default function StakingActions() {
     const { action } = useStaking();
-    const { pendingReward, myStaked } = useStakingInfo()
-    const { handleNormalWithdraw, handleEmergencyWithdraw } = useWithdraw()
-    const { isEmergency } = useWithdrawInfo()
+    const { pendingReward, myStaked } = useStakingInfo();
+    const { handleNormalWithdraw, handleEmergencyWithdraw } = useWithdraw();
+    const { isEmergency } = useWithdrawInfo();
     const { handleApprove } = useApproval();
     const { handleStake } = useStake();
 
@@ -40,17 +40,25 @@ export default function StakingActions() {
             <Button variant='primary' size='lg' disabled={pendingReward <= 1}>
                 Claim Reward
             </Button>
-            {
-                isEmergency ? (
-                    <Button variant='primary' onClick={() => handleEmergencyWithdraw()} size='lg' disabled={myStaked <= 0}>
-                        Emergency Withdraw
-                    </Button>
-                ) : (
-                    <Button variant='primary' onClick={() => handleNormalWithdraw()} size='lg' disabled={myStaked <= 0}>
-                        Withdraw
-                    </Button>
-                )
-            }
+            {isEmergency ? (
+                <Button
+                    variant='primary'
+                    onClick={() => handleEmergencyWithdraw()}
+                    size='lg'
+                    disabled={myStaked <= 0}
+                >
+                    Emergency Withdraw
+                </Button>
+            ) : (
+                <Button
+                    variant='primary'
+                    onClick={() => handleNormalWithdraw()}
+                    size='lg'
+                    disabled={myStaked <= 0}
+                >
+                    Withdraw
+                </Button>
+            )}
         </div>
     );
 }

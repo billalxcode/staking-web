@@ -11,7 +11,7 @@ export default function useStakingInfo() {
     const [totalStakingTokens, setTotalStakingTokens] = useState<bigint>(
         BigInt(0),
     );
-    const [ holderUnlocktime, setHolderUnlocktime ] = useState<Date | null>(null)
+    const [holderUnlocktime, setHolderUnlocktime] = useState<Date | null>(null);
     const { staking_contract: StakingContract } = useStakingContract();
     const [retryCount, setRetryCount] = useState(0);
     const { address } = useAccount();
@@ -45,12 +45,17 @@ export default function useStakingInfo() {
                 {
                     ...staking_contract,
                     functionName: 'holderUnlockTime',
-                    args: [address]
-                }
+                    args: [address],
+                },
             ],
         });
-        const [stakingApy, stakingTotalStaked, userInfo, stakingPendingReward, stakingHolderUnlocktime] =
-            results;
+        const [
+            stakingApy,
+            stakingTotalStaked,
+            userInfo,
+            stakingPendingReward,
+            stakingHolderUnlocktime,
+        ] = results;
 
         if (stakingApy.result !== undefined) {
             setApy((stakingApy.result as bigint).toString());
@@ -83,9 +88,13 @@ export default function useStakingInfo() {
             setPendingReward(BigInt(0));
         }
         if (stakingHolderUnlocktime.result !== undefined) {
-            const parsedStakingHolderTime = (stakingHolderUnlocktime.result as bigint).toString()
-            const holderUnlockDate = new Date((parseInt(parsedStakingHolderTime) as number ?? 0) * 1000)
-            setHolderUnlocktime(holderUnlockDate)
+            const parsedStakingHolderTime = (
+                stakingHolderUnlocktime.result as bigint
+            ).toString();
+            const holderUnlockDate = new Date(
+                ((parseInt(parsedStakingHolderTime) as number) ?? 0) * 1000,
+            );
+            setHolderUnlocktime(holderUnlockDate);
         }
     }, [
         StakingContract?.abi,
