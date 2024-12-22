@@ -17,7 +17,7 @@ export default function Alert() {
         } else if (variant == 'warning') {
             setClassName('text-yellow-600');
         } else if (variant == 'normal' || variant == 'loading') {
-            setClassName('text-[#000000cc]');
+            setClassName('text-[#000000cc] dark:text-white');
         }
     }, [variant, setClassName]);
 

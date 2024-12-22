@@ -18,7 +18,7 @@ export default function AlertAnimate() {
                 duration: 0.05,
                 repeat: Infinity,
             }}
-            className='w-4 h-4 border-2 border-t-[#000000cc] border-b-[#000000cc] border-l-transparent border-r-transparent rounded-full'
+            className='w-4 h-4 border-2 border-t-[#000000cc] border-b-[#000000cc] dark:border-t-white dark:border-b-white border-l-transparent border-r-transparent rounded-full'
         ></motion.span>
     );
 }

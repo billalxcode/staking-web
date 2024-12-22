@@ -2,11 +2,24 @@
 import useStaking from '@/states/features/staking/hooks';
 import useToken from '@/states/features/token/hooks';
 import Button from '@/ui/components/button/button';
+import { useCallback } from 'react';
 import { formatUnits } from 'viem';
 
 export default function StakingForm() {
     const { balance, symbol, decimals } = useToken();
     const { amount, updateAmount } = useStaking();
+
+    const handleFocus = useCallback(() => {
+        if (amount === "0") {
+            updateAmount("")
+        }
+    }, [amount, updateAmount])
+
+    const handleBlur = useCallback(() => {
+        if (amount.trim() === "") {
+            updateAmount("0")
+        }
+    }, [amount, updateAmount])
 
     return (
         <div className='flex flex-col gap-2'>
@@ -27,6 +40,8 @@ export default function StakingForm() {
                     id='amount'
                     value={amount}
                     onChange={(e) => updateAmount(e.target.value)}
+                    onFocus={() => handleFocus()}
+                    onBlur={() => handleBlur()}
                     className='w-full focus:outline-none px-3 dark:bg-dark-card60'
                     placeholder='Enter amount'
                 />
