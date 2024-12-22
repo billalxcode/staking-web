@@ -23,7 +23,6 @@ export default function useStakingInfo() {
             abi: StakingContract?.abi as Abi,
         };
         try {
-
             const results = await multicall(publicClient as Client, {
                 contracts: [
                     {
@@ -58,14 +57,14 @@ export default function useStakingInfo() {
                 stakingPendingReward,
                 stakingHolderUnlocktime,
             ] = results;
-    
+
             if (stakingApy.result !== undefined) {
                 setApy((stakingApy.result as bigint).toString());
             } else {
                 setApy('0');
                 setRetryCount((p) => (p += 1));
             }
-    
+
             if (stakingTotalStaked.result !== undefined) {
                 setTotalStakingTokens(stakingTotalStaked.result as bigint);
             } else {
@@ -95,7 +94,7 @@ export default function useStakingInfo() {
                 setHolderUnlocktime(holderUnlockDate);
             }
         } catch (e) {
-            if (e instanceof TypeError) return
+            if (e instanceof TypeError) return;
         }
     }, [
         StakingContract?.abi,
