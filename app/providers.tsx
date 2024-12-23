@@ -9,10 +9,10 @@ import { mainnet } from 'viem/chains';
 import WalletProvider from './wallet';
 
 const metadata = {
-    name: 'appkit-example',
-    description: 'AppKit Example',
-    url: 'https://appkitexampleapp.com', // origin must match your domain & subdomain
-    icons: ['https://avatars.githubusercontent.com/u/179229932'],
+    name: 'dreyerx',
+    description: 'DreyerX Staking',
+    url: 'https://stake.dreyerx.com', // origin must match your domain & subdomain
+    icons: ['https://storage.dreyerx.com/logo/logo-without-bg.png'],
 };
 
 createAppKit({
