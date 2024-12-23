@@ -99,11 +99,11 @@ export const contracts_list: Record<
             abi: StakingArtifact.abi as Abi
         },
         d60: {
-            address: "0x35a7E2891aB36d2a5E8F09708E01d50e89745BFd",
+            address: "0x8AB5487F410c4dF0f1Be40DB1ce470F8616a0Fa8",
             abi: StakingArtifact.abi as Abi
         },
         d90: {
-            address: "0x35a7E2891aB36d2a5E8F09708E01d50e89745BFd",
+            address: "0x6256B9C511D621D49200e6B7B60d6b60Ac4D4b44",
             abi: StakingArtifact.abi as Abi
         }
     },
