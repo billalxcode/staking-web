@@ -6,9 +6,12 @@ import useStakingInfo from '@/hooks/useStakingInfo';
 import useWithdrawInfo from '@/hooks/useWithdrawInfo';
 import useStaking from '@/states/features/staking/hooks';
 import Button from '@/ui/components/button/button';
+import { useAccount } from 'wagmi';
+import WalletButton from '../wallet/button';
 
 export default function StakingActions() {
     const { action } = useStaking();
+    const { isConnected} = useAccount()
     const { pendingReward, myStaked } = useStakingInfo();
     const { handleNormalWithdraw, handleEmergencyWithdraw } = useWithdraw();
     const { handleClaimReward } = useClaimReward();
@@ -16,6 +19,11 @@ export default function StakingActions() {
     const { handleApprove } = useApproval();
     const { handleStake } = useStake();
 
+    if (!isConnected) {
+        return (
+            <WalletButton />
+        )
+    }
     if (action == 'insufficient') {
         return (
             <Button variant='danger' size='lg' disabled>

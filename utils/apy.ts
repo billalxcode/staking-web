@@ -16,9 +16,6 @@ export function calculateAPY(
         typeof decimals == 'undefined'
     )
         return 0;
-    console.log('Reward per second', rewardPerSecond);
-    console.log('Total staked', totalStakedTokens);
-    console.log('Decimals', decimals);
     const totalRewards =
         parseFloat(rewardPerSecond.toString()) * (lockDurationDays * 86400);
 

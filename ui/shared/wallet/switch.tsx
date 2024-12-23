@@ -16,7 +16,6 @@ export default function NetworkSwitchModal(props: {
     const handleSwitchChain = useCallback(
         async (name: string, chainId: number) => {
             try {
-                console.log(chainId);
                 await switchChainAsync({ chainId });
                 setAlertMessage(
                     {
