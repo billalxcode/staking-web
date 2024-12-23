@@ -1,14 +1,11 @@
 'use client';
 import { wagmiAdapter } from '@/config/adapter';
-import {
-    dreyerxTestnet,
-    ganacheDevnet,
-    reown_project_id,
-} from '@/config/constants';
+import { ganacheDevnet, reown_project_id } from '@/config/constants';
 import { AppStore, makeStore } from '@/states/store';
 import { createAppKit } from '@reown/appkit/react';
 import { ReactNode, useRef } from 'react';
 import { Provider } from 'react-redux';
+import { mainnet } from 'viem/chains';
 import WalletProvider from './wallet';
 
 const metadata = {
@@ -21,14 +18,13 @@ const metadata = {
 createAppKit({
     adapters: [wagmiAdapter],
     projectId: reown_project_id,
-    networks: [dreyerxTestnet, ganacheDevnet],
+    networks: [mainnet],
     defaultNetwork: ganacheDevnet,
     metadata: metadata,
     features: {
         analytics: true,
-        connectMethodsOrder: ['wallet']
+        connectMethodsOrder: ['wallet'],
     },
-    
 });
 
 export default function AppProviders(props: {

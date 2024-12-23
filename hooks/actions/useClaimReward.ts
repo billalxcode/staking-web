@@ -9,8 +9,8 @@ export default function useClaimReward() {
     const { staking_contract } = useStakingContract();
     const { setAlertMessage } = useAlert();
     const { writeContractAsync } = useWriteContract();
-    const { pendingReward } = useStakingInfo()
-    const [canClaimReward, setCanClaimReward] = useState<boolean>(false)
+    const { pendingReward } = useStakingInfo();
+    const [canClaimReward, setCanClaimReward] = useState<boolean>(false);
     const publicClient = usePublicClient();
 
     const handleClaimReward = useCallback(async () => {
@@ -43,7 +43,7 @@ export default function useClaimReward() {
             },
             true,
         );
-        setCanClaimReward(false)
+        setCanClaimReward(false);
     }, [
         setAlertMessage,
         setCanClaimReward,
@@ -54,14 +54,12 @@ export default function useClaimReward() {
     ]);
 
     useEffect(() => {
-        if (pendingReward>0) {
-            setCanClaimReward(true)
+        if (pendingReward > 0) {
+            setCanClaimReward(true);
         }
-    }, [
-        pendingReward
-    ])
+    }, [pendingReward]);
     return {
         handleClaimReward,
-        canClaimReward
+        canClaimReward,
     };
 }

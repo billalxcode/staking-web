@@ -1,7 +1,7 @@
 import StakingArtifact from '@/config/contracts/staking.json';
 import TokenArtifact from '@/config/contracts/token.json';
 import { Abi, defineChain } from 'viem';
-import { hardhat } from 'viem/chains';
+import { hardhat, mainnet } from 'viem/chains';
 
 export const dreyerxTestnet = defineChain({
     id: 23452,
@@ -62,7 +62,7 @@ export const ganacheDevnet = defineChain({
 
 export const reown_project_id =
     process.env.NEXT_PUBLIC_REOWN_APPKIT_PROJECT_ID ?? '';
-export const networks = [dreyerxTestnet, hardhatDevnet, ganacheDevnet];
+export const networks = [mainnet];
 export const app_settings = {
     network_logo: process.env.NEXT_PUBLIC_NETWORK_LOGO ?? '',
 };
@@ -72,7 +72,7 @@ export interface SupportedContractsItem {
     abi: Abi;
 }
 
-export type SupportedChains = [23452, 31337, 1337];
+export type SupportedChains = [1, 23452, 31337, 1337];
 export type SupportedContracts = {
     token: SupportedContractsItem;
     m30: SupportedContractsItem;
@@ -85,6 +85,28 @@ export const contracts_list: Record<
     SupportedChains[number],
     SupportedContracts
 > = {
+    1: {
+        token: {
+            address: "0x2232F65655C7c41D8b6c8592Da3A0E32586273ea",
+            abi: TokenArtifact.abi as Abi
+        },
+        d30: {
+            address: "0x35a7E2891aB36d2a5E8F09708E01d50e89745BFd",
+            abi: StakingArtifact.abi as Abi
+        },
+        m30: {
+            address: "0x35a7E2891aB36d2a5E8F09708E01d50e89745BFd",
+            abi: StakingArtifact.abi as Abi
+        },
+        d60: {
+            address: "0x35a7E2891aB36d2a5E8F09708E01d50e89745BFd",
+            abi: StakingArtifact.abi as Abi
+        },
+        d90: {
+            address: "0x35a7E2891aB36d2a5E8F09708E01d50e89745BFd",
+            abi: StakingArtifact.abi as Abi
+        }
+    },
     23452: {
         token: {
             address: '0x8E89a66d08cdaE9602c6309f6a2bB4cd00FddCBC',

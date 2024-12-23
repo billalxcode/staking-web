@@ -29,7 +29,9 @@ export default function StakingForm() {
                 </label>
                 <p className='font-semibold'>
                     Balance:{' '}
-                    {Number(formatUnits(BigInt(balance), decimals ?? 18)).toFixed(4) ?? '-'}{' '}
+                    {Number(
+                        formatUnits(BigInt(balance), decimals ?? 18),
+                    ).toFixed(4) ?? '-'}{' '}
                     {symbol ?? ''}
                 </p>
             </div>

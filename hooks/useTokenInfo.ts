@@ -50,6 +50,7 @@ export default function useTokenInfo() {
                     },
                 ],
             });
+            console.log(results)
             setBalance((results[0].result as bigint) ?? BigInt(0));
             setSymbol((results[1].result as string) ?? 'DRX');
             setDecimals((results[2].result as number) ?? 18);
