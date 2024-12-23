@@ -25,8 +25,10 @@ createAppKit({
     defaultNetwork: ganacheDevnet,
     metadata: metadata,
     features: {
-        analytics: true, // Optional - defaults to your Cloud configuration
+        analytics: true,
+        connectMethodsOrder: ['wallet']
     },
+    
 });
 
 export default function AppProviders(props: {
