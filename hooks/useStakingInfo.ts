@@ -14,7 +14,6 @@ export default function useStakingInfo() {
     const [rewardRemaining, setRewardRemaining] = useState<bigint>(BigInt(0));
     const [holderUnlocktime, setHolderUnlocktime] = useState<Date | null>(null);
     const { staking_contract: StakingContract } = useStakingContract();
-    const [retryCount, setRetryCount] = useState(0);
     const { address } = useAccount();
     const publicClient = usePublicClient();
 
@@ -68,32 +67,27 @@ export default function useStakingInfo() {
                 setApy((stakingApy.result as bigint).toString());
             } else {
                 setApy('0');
-                setRetryCount((p) => (p += 1));
             }
 
             if (stakingTotalStaked.result !== undefined) {
                 setTotalStakingTokens(stakingTotalStaked.result as bigint);
             } else {
-                setRetryCount((p) => (p += 1));
                 setTotalStakingTokens(BigInt(0));
             }
             if (userInfo.result !== undefined) {
                 const user = userInfo.result as [bigint, bigint];
                 setMyStaked(user[0]);
             } else {
-                setRetryCount((p) => p + 1);
                 setMyStaked(BigInt(0));
             }
             if (stakingPendingReward.result !== undefined) {
                 setPendingReward(stakingPendingReward.result as bigint);
             } else {
-                setRetryCount((p) => (p += 1));
                 setPendingReward(BigInt(0));
             }
             if (stakingRewardRemaining.result !== undefined) {
                 setRewardRemaining(stakingRewardRemaining.result as bigint);
             } else {
-                setRetryCount((p) => (p += 1));
                 setRewardRemaining(BigInt(0));
             }
             if (stakingHolderUnlocktime.result !== undefined) {
@@ -120,7 +114,7 @@ export default function useStakingInfo() {
         if (StakingContract?.address) {
             fetchStakingInfo();
         }
-    }, [fetchStakingInfo, StakingContract]);
+    }, [fetchStakingInfo, StakingContract?.address]);
 
     return {
         apy,
