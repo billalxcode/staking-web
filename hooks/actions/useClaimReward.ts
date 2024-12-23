@@ -1,13 +1,16 @@
 import useAlert from '@/states/features/alert/hooks';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Abi } from 'viem';
 import { usePublicClient, useWriteContract } from 'wagmi';
 import useStakingContract from '../useStakingContract';
+import useStakingInfo from '../useStakingInfo';
 
 export default function useClaimReward() {
     const { staking_contract } = useStakingContract();
     const { setAlertMessage } = useAlert();
     const { writeContractAsync } = useWriteContract();
+    const { pendingReward } = useStakingInfo()
+    const [canClaimReward, setCanClaimReward] = useState<boolean>(false)
     const publicClient = usePublicClient();
 
     const handleClaimReward = useCallback(async () => {
@@ -40,15 +43,25 @@ export default function useClaimReward() {
             },
             true,
         );
+        setCanClaimReward(false)
     }, [
         setAlertMessage,
+        setCanClaimReward,
         writeContractAsync,
         staking_contract?.abi,
         staking_contract?.address,
         publicClient,
     ]);
 
+    useEffect(() => {
+        if (pendingReward>0) {
+            setCanClaimReward(true)
+        }
+    }, [
+        pendingReward
+    ])
     return {
         handleClaimReward,
+        canClaimReward
     };
 }
