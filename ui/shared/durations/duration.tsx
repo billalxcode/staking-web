@@ -6,15 +6,15 @@ import DurationButton from './button';
 
 const durations = [
     {
-        name: '30 Days',
+        name: '7 Days',
         value: 'd30',
     },
     {
-        name: '60 Days',
+        name: '21 Days',
         value: 'd60',
     },
     {
-        name: '90 Days',
+        name: '30 Days',
         value: 'd90',
     },
 ];
