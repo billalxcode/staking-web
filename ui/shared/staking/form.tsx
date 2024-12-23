@@ -23,13 +23,13 @@ export default function StakingForm() {
 
     return (
         <div className='flex flex-col gap-2'>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-3 lg:gap-0'>
                 <label htmlFor='amount' className='font-bold'>
                     Enter amount you want stake
                 </label>
                 <p className='font-semibold'>
                     Balance:{' '}
-                    {formatUnits(BigInt(balance), decimals ?? 18) ?? '-'}{' '}
+                    {Number(formatUnits(BigInt(balance), decimals ?? 18)).toFixed(4) ?? '-'}{' '}
                     {symbol ?? ''}
                 </p>
             </div>
