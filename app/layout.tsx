@@ -9,25 +9,24 @@ const inter = Inter({
     subsets: ['latin'],
     weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
-
 export const metadata: Metadata = {
-    title: 'DreyerX Name Service - Secure Your Unique Name',
+    title: 'DreyerX Staking - Maximize Your Rewards',
     description:
-        'Claim and manage your unique blockchain-based names securely with DreyerX Name Service.',
-    keywords: ['blockchain', 'ENS', 'name service', 'DreyerX', 'web3'],
+        'Stake your tokens securely with DreyerX Staking and earn attractive rewards. Join the decentralized ecosystem today.',
+    keywords: ['staking', 'DreyerX', 'blockchain', 'rewards', 'web3', 'crypto'],
     robots: 'index, follow',
     openGraph: {
-        title: 'DreyerX Name Service - Claim Your Unique Name',
+        title: 'DreyerX Staking - Earn Rewards Securely',
         description:
-            'Easily claim and manage your unique names on the blockchain with DreyerX Name Service.',
-        url: 'https://dreyerxns.com',
-        siteName: 'DreyerX Name Service',
+            'Lock your tokens with DreyerX Staking to earn rewards safely and efficiently in a decentralized environment.',
+        url: 'https://stake.dreyerx.com',
+        siteName: 'DreyerX Staking',
         images: [
             {
-                url: 'https://dreyerxns.com/og-image.png',
+                url: 'https://stake.dreyerx.com/og-image.png',
                 width: 1200,
                 height: 630,
-                alt: 'DreyerX Name Service Logo',
+                alt: 'DreyerX Staking Logo',
             },
         ],
         locale: 'en_US',
@@ -35,11 +34,11 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'DreyerX Name Service - Claim Your Unique Blockchain Name',
+        title: 'DreyerX Staking - Secure Your Rewards',
         description:
-            'Secure your place on the blockchain with DreyerX Name Service. Easy, fast, and decentralized.',
-        images: ['https://dreyerxns.com/twitter-image.png'],
-        site: '@dreyerxns',
+            'Start staking with DreyerX today to earn rewards securely in a decentralized blockchain ecosystem.',
+        images: ['https://dreyerxstaking.com/twitter-image.png'],
+        site: '@dreyerx',
     },
 };
 
