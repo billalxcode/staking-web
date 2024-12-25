@@ -5,13 +5,15 @@ import useWithdraw from '@/hooks/actions/useWithdraw';
 import useStakingInfo from '@/hooks/useStakingInfo';
 import useWithdrawInfo from '@/hooks/useWithdrawInfo';
 import useStaking from '@/states/features/staking/hooks';
+import useToken from '@/states/features/token/hooks';
 import Button from '@/ui/components/button/button';
 import { useAccount } from 'wagmi';
 import WalletButton from '../wallet/button';
 
 export default function StakingActions() {
     const { action } = useStaking();
-    const { isConnected} = useAccount()
+    const { balance } = useToken();
+    const { isConnected } = useAccount();
     const { pendingReward, myStaked, rewardRemaining } = useStakingInfo();
     const { handleNormalWithdraw, handleEmergencyWithdraw } = useWithdraw();
     const { handleClaimReward } = useClaimReward();
@@ -20,9 +22,7 @@ export default function StakingActions() {
     const { handleStake } = useStake();
 
     if (!isConnected) {
-        return (
-            <WalletButton />
-        )
+        return <WalletButton />;
     }
     if (action == 'insufficient') {
         return (
@@ -34,12 +34,20 @@ export default function StakingActions() {
 
     return (
         <div className='flex flex-col gap-2'>
-            {action == 'amount' ? (
+            {BigInt(balance) <= 0 ? (
+                <Button variant='danger' size='lg' disabled>
+                    Insufficient Token Balance
+                </Button>
+            ) : action == 'amount' ? (
                 <Button variant='secondary' size='lg' disabled>
                     Enter a amount
                 </Button>
             ) : action == 'stake' ? (
-                <Button size='lg' onClick={() => handleStake()}>
+                <Button
+                    size='lg'
+                    onClick={() => handleStake()}
+                    disabled={BigInt(balance) <= 0}
+                >
                     Stake
                 </Button>
             ) : action == 'approve' ? (
