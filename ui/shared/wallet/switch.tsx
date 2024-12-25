@@ -30,7 +30,7 @@ export default function NetworkSwitchModal(props: {
                 if (e instanceof UserRejectedRequestError) {
                     setAlertMessage(
                         {
-                            message: e.shortMessage,
+                            message: "User rejected the request",
                             variant: 'danger',
                             duration: 3000,
                         },

@@ -3,12 +3,7 @@ import useStaking from '@/states/features/staking/hooks';
 import useToken from '@/states/features/token/hooks';
 import { convert_wei } from '@/utils/token';
 import { useCallback } from 'react';
-import {
-    Abi,
-    ContractFunctionExecutionError,
-    ContractFunctionRevertedError,
-    maxInt256,
-} from 'viem';
+import { Abi, maxInt256, UserRejectedRequestError } from 'viem';
 import { usePublicClient, useWriteContract } from 'wagmi';
 import useContractByName from '../useContractByName';
 import useStakingContract from '../useStakingContract';
@@ -62,20 +57,20 @@ export default function useApproval() {
                 true,
             );
             updateAction('stake');
-        } catch (e) {
-            if (e instanceof ContractFunctionExecutionError) {
+        } catch (error) {
+            if (error instanceof UserRejectedRequestError) {
                 setAlertMessage(
                     {
-                        message: e.shortMessage,
+                        message: 'Transaction rejected',
                         variant: 'danger',
                         duration: 3000,
                     },
                     true,
                 );
-            } else if (e instanceof ContractFunctionRevertedError) {
+            } else {
                 setAlertMessage(
                     {
-                        message: e.shortMessage,
+                        message: 'Transaction failed',
                         variant: 'danger',
                         duration: 3000,
                     },
