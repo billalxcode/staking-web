@@ -3,7 +3,7 @@ import useStaking from '@/states/features/staking/hooks';
 import useToken from '@/states/features/token/hooks';
 import { convert_wei } from '@/utils/token';
 import { useCallback } from 'react';
-import { Abi, ContractFunctionExecutionError } from 'viem';
+import { Abi, UserRejectedRequestError } from 'viem';
 import { usePublicClient, useWriteContract } from 'wagmi';
 import useStakingContract from '../useStakingContract';
 
@@ -50,17 +50,27 @@ export default function useStake() {
                 true,
             );
         } catch (e) {
-            if (e instanceof ContractFunctionExecutionError) {
+            if (e instanceof UserRejectedRequestError) {
                 setAlertMessage(
                     {
-                        message: e.shortMessage,
+                        message: 'Transaction rejected',
                         variant: 'danger',
                         duration: 3000,
                     },
                     true,
                 );
+            } else {
+                setAlertMessage(
+                        {
+                            message: "Transaction failed",
+                            variant: 'danger',
+                            duration: 3000,
+                        },
+                        true,
+                    );
+                }
             }
-        }
+        
     }, [
         staking_contract?.abi,
         staking_contract?.address,
