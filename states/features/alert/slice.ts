@@ -11,7 +11,7 @@ export interface AlertState {
 const initialState: AlertState = {
     message: null,
     variant: 'info',
-    duration: 1000,
+    duration: 4000,
     isHidden: true,
 };
 
