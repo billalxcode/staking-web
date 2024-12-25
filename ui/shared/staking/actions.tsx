@@ -12,7 +12,7 @@ import WalletButton from '../wallet/button';
 export default function StakingActions() {
     const { action } = useStaking();
     const { isConnected} = useAccount()
-    const { pendingReward, myStaked } = useStakingInfo();
+    const { pendingReward, myStaked, rewardRemaining } = useStakingInfo();
     const { handleNormalWithdraw, handleEmergencyWithdraw } = useWithdraw();
     const { handleClaimReward } = useClaimReward();
     const { isEmergency } = useWithdrawInfo();
@@ -51,7 +51,7 @@ export default function StakingActions() {
                 variant='primary'
                 onClick={() => handleClaimReward()}
                 size='lg'
-                disabled={pendingReward <= 1}
+                disabled={pendingReward <= 1 || pendingReward > rewardRemaining}
             >
                 Claim Reward
             </Button>
@@ -60,7 +60,7 @@ export default function StakingActions() {
                     variant='primary'
                     onClick={() => handleEmergencyWithdraw()}
                     size='lg'
-                    disabled={myStaked <= 0}
+                    disabled={myStaked <= 0 || rewardRemaining <= myStaked}
                 >
                     Emergency Withdraw
                 </Button>
@@ -69,7 +69,7 @@ export default function StakingActions() {
                     variant='primary'
                     onClick={() => handleNormalWithdraw()}
                     size='lg'
-                    disabled={myStaked <= 0}
+                    disabled={myStaked <= 0 || rewardRemaining <= myStaked}
                 >
                     Withdraw
                 </Button>
